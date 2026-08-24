@@ -1,3 +1,8 @@
+# Environment Variables (Keep private keys out of git)
+.env
+.env.local
+.env.*.local
+
 # Ignore large archive (already extracted to frames/)
 video_frames_smaller.zip
 
