@@ -725,8 +725,74 @@
       </div>
     </footer>
 
-  </div>
+  <!-- Floating Glassmorphic AI Assistant Trigger Orb -->
+  <button id="ai-orb-trigger" class="ai-floating-orb" aria-label="Open Anjali AI Assistant">
+    <div class="orb-pulse-ring"></div>
+    <div class="orb-content">
+      <span class="orb-star">✦</span>
+      <span class="orb-label">ASK AI</span>
+      <span class="orb-live-dot"></span>
+    </div>
+  </button>
+
+  <!-- Glassmorphic AI Chat Drawer Modal -->
+  <aside id="ai-chat-drawer" class="ai-chat-drawer" aria-label="Anjali AI Co-Pilot">
+    <!-- Chat Header -->
+    <div class="ai-drawer-header">
+      <div class="ai-profile-info">
+        <div class="ai-avatar-badge">
+          <span class="ai-avatar-symbol">✦</span>
+          <span class="ai-status-indicator"></span>
+        </div>
+        <div class="ai-title-wrap">
+          <h3 class="ai-name">ANJALI AI</h3>
+          <span class="ai-tagline">Portfolio Co-Pilot • Online</span>
+        </div>
+      </div>
+
+      <div class="ai-header-actions">
+        <button id="ai-clear-btn" class="ai-icon-btn" title="Clear Chat History">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+        <button id="ai-close-btn" class="ai-icon-btn" title="Close Chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="ai-quick-chips-wrapper">
+      <div class="ai-quick-chips" id="ai-quick-chips"></div>
+    </div>
+
+    <!-- Message Conversation Area -->
+    <div class="ai-messages-container" id="ai-messages-container"></div>
+
+    <!-- Input Form -->
+    <form class="ai-input-form" id="ai-chat-form">
+      <input
+        type="text"
+        id="ai-chat-input"
+        class="ai-input-field"
+        placeholder="Ask about skills, projects, experience..."
+        autocomplete="off"
+      />
+      <button type="submit" class="ai-send-btn" id="ai-send-btn" aria-label="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </aside>
 
   <script src="main.js"></script>
+  <script src="ai-assistant.js"></script>
 </body>
 </html>
