@@ -170,27 +170,63 @@
   function getClientFallback(userText) {
     const q = (userText || '').toLowerCase().trim();
 
-    if (q.includes('summary') || q.includes('recruiter') || q.includes('hire') || q.includes('who are you') || q.includes('about')) {
+    // 1. Specific Project: Nexus Finance Engine
+    if (q.includes('nexus') || (q.includes('finance') && q.includes('engine'))) {
+      return {
+        reply: `### 📊 Nexus Finance Engine Architecture\n\nThe **Nexus Finance Engine** is a high-throughput, low-latency fintech analytics platform built for real-time portfolio risk calculations and live market streaming.\n\n- **Live Streaming Layer**: Persistent bi-directional **WebSockets** for sub-millisecond crypto & equity price ingestion without polling.\n- **Computation Engine**: Asynchronous **FastAPI (Python)** handling concurrent financial portfolio modeling with high mathematical performance.\n- **Caching & Pub/Sub**: **Redis** in-memory store for transient analytical state caching and message distribution.\n- **Reactive UI**: **React** dashboard with optimized virtualized data grids for zero-lag rendering at 60fps.`,
+        action: 'NAVIGATE_PROJECTS'
+      };
+    }
+
+    // 2. Specific Project: Elevate Platform
+    if (q.includes('elevate')) {
+      return {
+        reply: `### 🛍️ Elevate Platform Architecture\n\nThe **Elevate Platform** is a scalable luxury e-commerce engine designed for high traffic and resilient checkout flows.\n\n- **Frontend**: **Next.js App Router** with Server-Side Rendering (SSR) and edge-cached catalog pages for instantaneous page loads.\n- **Backend & Database**: **Node.js** microservices with **PostgreSQL** relational schemas enforcing ACID transactions for inventory.\n- **Session & Cache**: **Redis** distributed session caching and shopping cart persistence.\n- **Payments & Security**: Stripe API integration, JWT token authentication, and role-based access control.`,
+        action: 'NAVIGATE_PROJECTS'
+      };
+    }
+
+    // 3. Specific Project: Travelora Cloud
+    if (q.includes('travelora')) {
+      return {
+        reply: `### ✈️ Travelora Cloud Architecture\n\n**Travelora Cloud** is a distributed adventure booking engine engineered for global scalability.\n\n- **Microservices**: Polyglot services written in **TypeScript** and **Go** for high-concurrency reservation processing.\n- **Cloud Infrastructure**: **AWS ECS & Fargate** containerized microservices behind an Application Load Balancer (ALB).\n- **Content & Assets**: **AWS CloudFront CDN** and **S3** bucket storage for multi-region media delivery.\n- **Search & Discovery**: Resilient geo-distributed search index with caching.`,
+        action: 'NAVIGATE_PROJECTS'
+      };
+    }
+
+    // 4. Specific Project: Veloce Telemetry App
+    if (q.includes('veloce')) {
+      return {
+        reply: `### 🏎️ Veloce Telemetry App Architecture\n\n**Veloce** is a real-time health & athletic telemetry tracking application.\n\n- **Cross-Platform Client**: **React Native** mobile application with native GPU-accelerated telemetry charts.\n- **Unified API**: **GraphQL** endpoint minimizing network payload sizes and eliminating over-fetching.\n- **Deployment**: **Docker** containerized services with automated CI/CD integration testing.`,
+        action: 'NAVIGATE_PROJECTS'
+      };
+    }
+
+    // 5. General Projects Overview
+    if (q.includes('project') || q.includes('work') || q.includes('portfolio') || q.includes('case stud')) {
+      return {
+        reply: `Here are Anjali's 4 core full-stack featured projects:\n\n1. **Nexus Finance Engine** (*React, FastAPI, Redis, WebSockets*) — Real-time fintech analytics platform with sub-millisecond calculations.\n2. **Elevate Platform** (*Next.js, Node.js, PostgreSQL*) — High-scale luxury e-commerce platform with ACID inventory management.\n3. **Travelora Cloud** (*TypeScript, Go, Microservices, AWS*) — Distributed booking engine with geo-distributed architecture.\n4. **Veloce Telemetry App** (*React Native, GraphQL, Docker*) — Health SaaS with real-time telemetry metrics.\n\n*I have scrolled the page down to the Featured Projects section for you!*`,
+        action: 'NAVIGATE_PROJECTS'
+      };
+    }
+
+    // 6. Recruiter & Bio (Strict Matching)
+    if (q.includes('summary') || q.includes('recruiter') || q.includes('hire') || q.includes('who are you') || q.includes('who is anjali') || q.includes('about anjali') || q.includes('about her') || q.includes('background') || q.includes('bio')) {
       return {
         reply: `**Anjali Modi** is a **Full Stack Developer** with **2+ years of experience** specializing in scalable web systems, resilient backend APIs, and modern reactive frontends.\n\n### ⚡ Highlights:\n- **Full Stack Expertise**: React / Next.js, TypeScript, Node.js, PostgreSQL, Docker & AWS.\n- **Production Track Record**: 20+ web applications and microservices deployed with 99.9% uptime.\n- **Engineering Focus**: Clean architecture, type-safety, database optimization, and high performance.\n\nWould you like to explore her **featured projects** or discuss **collaborating on a project**?`,
         action: 'NAVIGATE_ABOUT'
       };
     }
 
-    if (q.includes('project') || q.includes('work') || q.includes('elevate') || q.includes('nexus') || q.includes('travelora') || q.includes('veloce')) {
-      return {
-        reply: `Here are Anjali's key full-stack featured projects:\n\n1. **Elevate Platform** (*Next.js, Node.js, PostgreSQL*) — High-scale e-commerce system with real-time inventory management.\n2. **Nexus Finance Engine** (*React, FastAPI, Redis, WebSockets*) — Live fintech analytics dashboard with sub-millisecond streaming.\n3. **Travelora Cloud** (*TypeScript, Go, Microservices, AWS*) — Distributed booking engine with geo-distributed architecture.\n4. **Veloce Telemetry App** (*React Native, GraphQL, Docker*) — Health SaaS with real-time fitness metrics and telemetry.\n\n*I have scrolled the page down to the Featured Projects section for you to inspect!*`,
-        action: 'NAVIGATE_PROJECTS'
-      };
-    }
-
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language') || q.includes('react') || q.includes('node') || q.includes('database') || q.includes('docker') || q.includes('aws')) {
+    // 7. Tech Stack & Skills
+    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language') || q.includes('react') || q.includes('node') || q.includes('database') || q.includes('docker') || q.includes('aws') || q.includes('fastapi') || q.includes('redis') || q.includes('postgres') || q.includes('typescript')) {
       return {
         reply: `Anjali's core engineering tech stack includes:\n\n- **Frontend**: React, Next.js, TypeScript, Modern CSS/HTML5, TailwindCSS.\n- **Backend**: Node.js, Express, Python, FastAPI, Go, REST & GraphQL APIs.\n- **Databases**: PostgreSQL, Redis, MongoDB, SQL schema design & query tuning.\n- **DevOps & Cloud**: Docker, AWS (EC2, S3, CloudFront), CI/CD pipelines, Git.\n\nAll systems are built with an emphasis on **maintainability, security, and low latency**.`,
         action: 'NAVIGATE_ABOUT'
       };
     }
 
+    // 8. Services
     if (q.includes('service') || q.includes('what can you do') || q.includes('what i do') || q.includes('offer')) {
       return {
         reply: `Anjali offers end-to-end full stack engineering capabilities:\n\n- **Full Stack Development**: Robust web apps from database to UI.\n- **Backend & APIs**: High-throughput REST & GraphQL microservices.\n- **Frontend Systems**: High-performance, accessible, and reactive interfaces.\n- **Cloud & DevOps**: Containerization with Docker, CI/CD automated deployments, and AWS hosting.\n- **Database Architecture**: Scalable relational (PostgreSQL) and in-memory (Redis) systems.`,
@@ -198,6 +234,7 @@
       };
     }
 
+    // 9. Engineering Process
     if (q.includes('process') || q.includes('workflow') || q.includes('methodology') || q.includes('how do you work') || q.includes('test')) {
       return {
         reply: `Anjali adheres to a rigorous 5-phase engineering process:\n\n1. **Discover & Plan**: Requirement scoping, user flows & system architecture.\n2. **System Architecture**: Designing schema models, API contracts, and state management.\n3. **Core Development**: Writing clean, type-safe, modular code.\n4. **Test & Optimize**: Automated unit/integration tests and performance profiling.\n5. **Deploy & Monitor**: CI/CD automation, cloud deployment, and real-time observability.`,
@@ -205,6 +242,7 @@
       };
     }
 
+    // 10. Contact & Links
     if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('github') || q.includes('linkedin') || q.includes('call') || q.includes('location') || q.includes('interview')) {
       return {
         reply: `You can reach out to Anjali directly via:\n\n- ✉️ **Email**: [anjalimodi2424@gmail.com](mailto:anjalimodi2424@gmail.com)\n- 📞 **Phone**: [+91 63770 49591](tel:+916377049591)\n- 📍 **Location**: Bhubaneswar, India\n- 💼 **LinkedIn**: [anjali-modi-238366352](https://www.linkedin.com/in/anjali-modi-238366352)\n- 🐙 **GitHub**: [github.com/AnjaliModi2](https://github.com/AnjaliModi2)\n\n*I have scrolled the page down to the contact section so you can scan the QR codes or send a message directly!*`,
