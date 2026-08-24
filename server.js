@@ -148,10 +148,11 @@ async function callGeminiAPI(apiKey, userMessage, history = []) {
     const options = {
       hostname: 'generativelanguage.googleapis.com',
       port: 443,
-      path: `/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      path: '/v1beta/models/gemini-3.6-flash:generateContent',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
         'Content-Length': Buffer.byteLength(postData)
       }
     };
