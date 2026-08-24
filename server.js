@@ -168,18 +168,19 @@ function generateFallbackResponse(userMessage) {
 // Call Gemini API if API key is available
 async function callGeminiAPI(apiKey, userMessage, history = []) {
   return new Promise((resolve, reject) => {
-    const contents = [
-      {
-        role: 'user',
-        parts: [{ text: `${SYSTEM_PROMPT}\n\nUser Question: ${userMessage}` }]
-      }
-    ];
-
     const postData = JSON.stringify({
-      contents,
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: userMessage }]
+        }
+      ],
+      systemInstruction: {
+        parts: [{ text: SYSTEM_PROMPT }]
+      },
       generationConfig: {
         temperature: 0.7,
-        maxOutputTokens: 800
+        maxOutputTokens: 2048
       }
     });
 
@@ -196,11 +197,12 @@ async function callGeminiAPI(apiKey, userMessage, history = []) {
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', chunk => { data += chunk; });
+      let chunks = [];
+      res.on('data', chunk => { chunks.push(chunk); });
       res.on('end', () => {
         try {
-          const parsed = JSON.parse(data);
+          const raw = Buffer.concat(chunks).toString('utf8');
+          const parsed = JSON.parse(raw);
           if (parsed.candidates && parsed.candidates[0] && parsed.candidates[0].content) {
             const text = parsed.candidates[0].content.parts[0].text;
             
